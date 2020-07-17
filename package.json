@@ -8,6 +8,9 @@
   },
   "author": "Ken H.",
   "license": "ISC",
+  "engines": {
+    "node": "12.18.2"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
