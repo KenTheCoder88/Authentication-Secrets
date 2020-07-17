@@ -190,7 +190,7 @@ app.route("/register")
       .post(function(req, res) {
         //saves the secret the user submitted
         const submittedSecret = req.body.secret;
-        //find current user in mongDB and save submitted secrets to their account
+        //finds current user in mongDB and save submitted secrets to their account
         console.log(req.user.id);
         //finds current user in mongDB
         User.findById(req.user.id, function(err, foundUser) {
