@@ -7,7 +7,6 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
@@ -22,7 +21,7 @@ app.set("view engine", "ejs");
 //uses bodyparser, express.js, express-session, MongoStore and passport.js packages
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
-app.use(session({secret: "Our little secret.", store: new MongoStore({client: clientInstance, dbName: "userDB"}), resave: false, saveUninitialized: false}));
+app.use(session({secret: "Our little secret.", resave: false, saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -69,7 +68,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/secrets",
+    callbackURL: "https://agile-brook-49599.herokuapp.com/auth/google/secrets",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
