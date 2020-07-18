@@ -68,10 +68,11 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://localhost:3000/auth/google/secrets",
+    callbackURL: "https://agile-brook-49599.herokuapp.com/auth/google/secrets",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
+    console.log(profile);
     //finds current user or creates new user in mongDB
     User.findOrCreate({googleId: profile.id}, function (err, user) {
       return cb(err, user);
@@ -175,6 +176,8 @@ app.route("/register")
       req.login(user, function(err) {
         if(err) {
           console.log(err);
+          //redirects to the /home route
+          res.redirect("/");
         } else {
           passport.authenticate("local")(req, res, function() {
             //redirects to the /secrets route
