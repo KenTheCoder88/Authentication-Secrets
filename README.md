@@ -1,3 +1,3 @@
 # Secrets
 
-https://agile-brook-49599.herokuapp.com/
+https://anonymoussecrets.herokuapp.com/
